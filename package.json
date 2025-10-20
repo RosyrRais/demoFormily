@@ -1,0 +1,59 @@
+{
+  "name": "demoFormily",
+  "version": "1.0.0",
+  "scripts": {
+    "reset": "npx rimraf ./**/node_modules",
+    "setup": "pnpm run reset && pnpm install",
+    "dev": "edenx dev",
+    "build": "edenx build",
+    "start": "edenx start",
+    "serve": "edenx serve",
+    "new": "edenx new",
+    "lint": "edenx lint",
+    "lint:error": "edenx lint --quiet",
+    "deploy": "edenx deploy",
+    "prepare": "simple-git-hooks",
+    "upgrade": "edenx upgrade"
+  },
+  "engines": {
+    "node": ">=16"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "node --max_old_space_size=8192 ./node_modules/eslint/bin/eslint.js --fix --color --cache --quiet"
+    ],
+    "*.{js,jsx,mjs,mjsx,cjs,cjsx}": [
+      "node --max_old_space_size=8192 ./node_modules/eslint/bin/eslint.js --fix --color --cache --quiet"
+    ]
+  },
+  "simple-git-hooks": {
+    "pre-commit": "npx lint-staged"
+  },
+  "eslintIgnore": [
+    "node_modules/",
+    "dist/",
+    "stories"
+  ],
+  "dependencies": {
+    "@edenx/runtime": "1.68.18",
+    "react": "~18.2.0",
+    "react-dom": "~18.2.0"
+  },
+  "devDependencies": {
+    "@edenx/app-tools": "1.68.18",
+    "@edenx/tsconfig": "1.68.18",
+    "@byted/eslint-config-standard": "^3.1.1",
+    "@byted/eslint-config-standard-react": "^2.1.1",
+    "eslint-plugin-prettier": "~5.2.2",
+    "eslint": "^8.57.0",
+    "lint-staged": "~13.1.0",
+    "prettier": "^3.4.2",
+    "simple-git-hooks": "^2.11.1",
+    "typescript": "~5.0.4",
+    "@types/node": "~16.11.7",
+    "@types/react": "~18.2.22",
+    "@types/react-dom": "~18.2.7",
+    "@byted/eslint-config-standard-ts": "^3.1.1",
+    "rimraf": "~3.0.2"
+  }
+}
