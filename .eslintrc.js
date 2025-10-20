@@ -1,30 +1,48 @@
 module.exports = {
   root: true,
-  parserOptions: { tsconfigRootDir: __dirname },
-  plugins: ['prettier'],
-  rules: {
-    // eslint-disable-next-line
-    'prettier/prettier': 'error',
+  env: {
+    browser: true,
+    node: true,
+    es2021: true,
+  },
+  ignorePatterns: [
+    '.eslintrc.js',
+    'build/**',
+    'static/**',
+    'dist/**',
+    'node_modules/**',
+    '*.md',
+  ],
+  extends: ['eslint:recommended'],
+  parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
   },
   overrides: [
     {
-      files: ['*.js', '*.jsx'],
-      extends: '@byted/eslint-config-standard',
-    },
-    {
       files: ['*.ts', '*.tsx'],
-      extends: '@byted/eslint-config-standard-ts',
+      parser: '@typescript-eslint/parser',
+      parserOptions: {
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+        project: './tsconfig.json',
+        tsconfigRootDir: __dirname,
+      },
+      rules: {
+        'no-unused-vars': 'off',
+        'no-undef': 'off',
+      },
     },
     {
       files: ['*.jsx', '*.tsx'],
-      extends: '@byted/eslint-config-standard-react/jsx-runtime',
-    },
-    {
-      files: ['*'],
+      parserOptions: {
+        ecmaFeatures: {
+          jsx: true,
+        },
+      },
       rules: {
-        'no-autofix/@typescript-eslint/no-unnecessary-condition': 'off',
-        'no-autofix/@typescript-eslint/no-unnecessary-boolean-literal-compare': 'off',
-        'no-autofix/react/jsx-no-leaked-render': 'off',
+        'react/jsx-uses-react': 'off',
+        'react/jsx-uses-vars': 'off',
       },
     },
   ],
