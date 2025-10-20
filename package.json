@@ -35,27 +35,33 @@
     "stories"
   ],
   "dependencies": {
+    "@byted/easy-formily": "^1.6.0",
+    "@douyinfe/semi-ui": "^2.87.1",
+    "@edenx/plugin-tailwind": "1.68.18",
     "@edenx/runtime": "1.68.18",
+    "@formily/core": "~2.2.25",
+    "@formily/react": "~2.2.25",
+    "@formily/reactive": "~2.2.25",
+    "@formily/semi": "1.0.4-beta.1",
     "react": "~18.2.0",
-    "react-dom": "~18.2.0",
-    "@edenx/plugin-tailwind": "1.68.18"
+    "react-dom": "~18.2.0"
   },
   "devDependencies": {
-    "@edenx/app-tools": "1.68.18",
-    "@edenx/tsconfig": "1.68.18",
     "@byted/eslint-config-standard": "^3.1.1",
     "@byted/eslint-config-standard-react": "^2.1.1",
-    "eslint-plugin-prettier": "~5.2.2",
-    "eslint": "^8.57.0",
-    "lint-staged": "~13.1.0",
-    "prettier": "^3.4.2",
-    "simple-git-hooks": "^2.11.1",
-    "typescript": "~5.0.4",
+    "@byted/eslint-config-standard-ts": "^3.1.1",
+    "@edenx/app-tools": "1.68.18",
+    "@edenx/tsconfig": "1.68.18",
     "@types/node": "~16.11.7",
     "@types/react": "~18.2.22",
     "@types/react-dom": "~18.2.7",
-    "@byted/eslint-config-standard-ts": "^3.1.1",
+    "eslint": "^8.57.0",
+    "eslint-plugin-prettier": "~5.2.2",
+    "lint-staged": "~13.1.0",
+    "prettier": "^3.4.2",
     "rimraf": "~3.0.2",
-    "tailwindcss": "~3.4.14"
+    "simple-git-hooks": "^2.11.1",
+    "tailwindcss": "~3.4.14",
+    "typescript": "~5.0.4"
   }
 }

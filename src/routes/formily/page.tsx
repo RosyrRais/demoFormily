@@ -1,4 +1,5 @@
 import React from 'react';
+import { CreateForm } from './createForm';
 
 const FormilyPage = (): JSX.Element => (
   <div className="container mx-auto p-8">
@@ -6,6 +7,9 @@ const FormilyPage = (): JSX.Element => (
     <p className="text-gray-600">
       这是一个 Formily 页面基本模版。你可以在这里开始搭建你的表单页面。
     </p>
+    <div>
+      <CreateForm />
+    </div>
   </div>
 );
 
