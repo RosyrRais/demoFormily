@@ -7,7 +7,10 @@ import {
   Typography,
   Space,
   Card,
+  Table,
+  Image,
 } from '@douyinfe/semi-ui';
+import { recImg } from './const';
 
 const { Title, Text } = Typography;
 
@@ -127,72 +130,105 @@ const RecognizePage = (): JSX.Element => {
         onModelChange={handleModelChange}
       />
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* 左侧：文件上传和列表 */}
-        <Card title="文件管理" className="h-fit">
-          <div className="space-y-4">
-            <Upload
-              action=""
-              multiple
-              accept="image/*,.pdf,.doc,.docx"
-              onChange={handleFileChange}
-              className="w-full"
-            >
-              <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-blue-400 transition-colors">
-                <div className="text-4xl text-gray-400 mb-4">📁</div>
-                <Text className="block mb-2">点击或拖拽文件到此处上传</Text>
-                <Text type="tertiary" size="small">
-                  支持 JPG、PNG、PDF、DOC、DOCX 格式
-                </Text>
-              </div>
-            </Upload>
-
-            {files.length > 0 && (
-              <div className="mt-4">
-                <Text strong>已上传文件 ({files.length})</Text>
-                <div className="mt-2 space-y-2 max-h-64 overflow-y-auto">
-                  {files.map((file, index) => (
-                    <div
-                      key={index}
-                      className="flex items-center justify-between p-2 bg-gray-50 rounded"
-                    >
-                      <span className="text-sm truncate">{file.name}</span>
-                      <Button
-                        size="small"
-                        type="danger"
-                        onClick={() => {
-                          const newFiles = files.filter((_, i) => i !== index);
-                          setFiles(newFiles);
-                        }}
-                      >
-                        🗑️
-                      </Button>
-                    </div>
-                  ))}
-                </div>
+      <Card title="图片展示" className="h-fit">
+        <Table dataSource={recImg} pagination={false} size="small">
+          <Table.Column
+            title="序号"
+            dataIndex="label"
+            key="label"
+            width={80}
+            align="center"
+            render={text => (
+              <div className="font-medium text-gray-700">#{text}</div>
+            )}
+          />
+          <Table.Column
+            title="原图"
+            dataIndex="lowImg"
+            key="lowImg"
+            width={200}
+            align="center"
+            render={(lowImg, record) => (
+              <div className="flex justify-center">
+                <Image
+                  src={lowImg}
+                  alt={`原图 ${record.label}`}
+                  width={150}
+                  height={100}
+                  className="rounded border object-cover"
+                  preview={{
+                    src: lowImg,
+                  }}
+                />
               </div>
             )}
-          </div>
-        </Card>
-
-        {/* 右侧：识别结果 */}
-        <Card title="识别结果" className="h-fit">
-          <div className="min-h-64 flex items-center justify-center text-gray-500">
-            {files.length === 0 ? (
-              <Text type="tertiary">请先上传文件进行识别</Text>
-            ) : (
-              <div className="w-full">
-                <Text type="tertiary" className="block mb-4">
-                  使用模型：{selectedModel}
-                </Text>
-                <div className="bg-gray-50 p-4 rounded-lg">
-                  <Text type="tertiary">识别结果将在此处显示...</Text>
-                </div>
+          />
+          <Table.Column
+            title="超分辨率图"
+            dataIndex="highImg"
+            key="highImg"
+            width={200}
+            align="center"
+            render={(highImg, record) => (
+              <div className="flex justify-center">
+                <Image
+                  src={highImg}
+                  alt={`超分辨率图 ${record.label}`}
+                  width={150}
+                  height={100}
+                  className="rounded border object-cover"
+                  preview={{
+                    src: highImg,
+                  }}
+                />
               </div>
             )}
-          </div>
-        </Card>
-      </div>
+          />
+          <Table.Column
+            title="对比"
+            key="compare"
+            width={120}
+            align="center"
+            render={(_, record) => (
+              <Button
+                size="small"
+                type="primary"
+                onClick={() => {
+                  // 实现图片对比功能
+                  Modal.info({
+                    title: `图片 ${record.label} 对比`,
+                    width: 800,
+                    content: (
+                      <div className="grid grid-cols-2 gap-4 mt-4">
+                        <div className="text-center">
+                          <div className="mb-2 font-medium">原图</div>
+                          <Image
+                            src={record.lowImg}
+                            alt={`原图 ${record.label}`}
+                            width="100%"
+                            className="rounded border"
+                          />
+                        </div>
+                        <div className="text-center">
+                          <div className="mb-2 font-medium">超分辨率图</div>
+                          <Image
+                            src={record.highImg}
+                            alt={`超分辨率图 ${record.label}`}
+                            width="100%"
+                            className="rounded border"
+                          />
+                        </div>
+                      </div>
+                    ),
+                  });
+                }}
+              >
+                对比查看
+              </Button>
+            )}
+          />
+        </Table>
+      </Card>
 
       {/* 上传模态框 */}
       <Modal
