@@ -143,7 +143,7 @@ const RecognizePage = (): JSX.Element => {
             )}
           />
           <Table.Column
-            title="原图"
+            title="低分辨率"
             dataIndex="lowImg"
             key="lowImg"
             width={200}
@@ -154,7 +154,7 @@ const RecognizePage = (): JSX.Element => {
                   src={lowImg}
                   alt={`原图 ${record.label}`}
                   width={150}
-                  height={100}
+                  // height={100}
                   className="rounded border object-cover"
                   preview={{
                     src: lowImg,
@@ -164,7 +164,7 @@ const RecognizePage = (): JSX.Element => {
             )}
           />
           <Table.Column
-            title="超分辨率图"
+            title="高分辨率"
             dataIndex="highImg"
             key="highImg"
             width={200}
@@ -175,7 +175,7 @@ const RecognizePage = (): JSX.Element => {
                   src={highImg}
                   alt={`超分辨率图 ${record.label}`}
                   width={150}
-                  height={100}
+                  // height={100}
                   className="rounded border object-cover"
                   preview={{
                     src: highImg,
@@ -185,7 +185,19 @@ const RecognizePage = (): JSX.Element => {
             )}
           />
           <Table.Column
-            title="对比"
+            title="识别文本"
+            dataIndex="text"
+            key="text"
+            width={150}
+            align="center"
+            render={(text, record) => (
+              <div className="px-3 py-2 bg-blue-50 rounded-lg text-sm font-mono text-blue-700 border border-blue-200 max-w-32 mx-auto">
+                {text || '无识别结果'}
+              </div>
+            )}
+          />
+          <Table.Column
+            title="操作"
             key="compare"
             width={120}
             align="center"
@@ -199,24 +211,35 @@ const RecognizePage = (): JSX.Element => {
                     title: `图片 ${record.label} 对比`,
                     width: 800,
                     content: (
-                      <div className="grid grid-cols-2 gap-4 mt-4">
-                        <div className="text-center">
-                          <div className="mb-2 font-medium">原图</div>
-                          <Image
-                            src={record.lowImg}
-                            alt={`原图 ${record.label}`}
-                            width="100%"
-                            className="rounded border"
-                          />
+                      <div className="space-y-6">
+                        <div className="text-center p-4 bg-blue-50 rounded-lg">
+                          <div className="text-sm text-gray-600 mb-2">
+                            识别结果
+                          </div>
+                          <div className="text-lg font-mono font-medium text-blue-700">
+                            {record.text || '无识别结果'}
+                          </div>
                         </div>
-                        <div className="text-center">
-                          <div className="mb-2 font-medium">超分辨率图</div>
-                          <Image
-                            src={record.highImg}
-                            alt={`超分辨率图 ${record.label}`}
-                            width="100%"
-                            className="rounded border"
-                          />
+
+                        <div className="grid grid-cols-2 gap-4">
+                          <div className="text-center">
+                            <div className="mb-2 font-medium">低分辨率</div>
+                            <Image
+                              src={record.lowImg}
+                              alt={`原图 ${record.label}`}
+                              width="100%"
+                              className="rounded border"
+                            />
+                          </div>
+                          <div className="text-center">
+                            <div className="mb-2 font-medium">高分辨率</div>
+                            <Image
+                              src={record.highImg}
+                              alt={`超分辨率图 ${record.label}`}
+                              width="100%"
+                              className="rounded border"
+                            />
+                          </div>
                         </div>
                       </div>
                     ),

@@ -16,14 +16,14 @@ import lowImg8 from '@/asset/pic/08.png';
 import highImg8 from '@/asset/pic/08_sr.png';
 
 const recImg = [
-  { label: '1', lowImg: lowImg1, highImg: highImg1 },
-  { label: '2', lowImg: lowImg2, highImg: highImg2 },
-  { label: '3', lowImg: lowImg3, highImg: highImg3 },
-  { label: '4', lowImg: lowImg4, highImg: highImg4 },
-  { label: '5', lowImg: lowImg5, highImg: highImg5 },
-  { label: '6', lowImg: lowImg6, highImg: highImg6 },
-  { label: '7', lowImg: lowImg7, highImg: highImg7 },
-  { label: '8', lowImg: lowImg8, highImg: highImg8 },
+  { label: '1', lowImg: lowImg1, highImg: highImg1, text: 'education' },
+  { label: '2', lowImg: lowImg2, highImg: highImg2, text: 'walk' },
+  { label: '3', lowImg: lowImg3, highImg: highImg3, text: 'watt' },
+  { label: '4', lowImg: lowImg4, highImg: highImg4, text: 'details' },
+  { label: '5', lowImg: lowImg5, highImg: highImg5, text: 'rose' },
+  { label: '6', lowImg: lowImg6, highImg: highImg6, text: 'pascal' },
+  { label: '7', lowImg: lowImg7, highImg: highImg7, text: 'pascal' },
+  { label: '8', lowImg: lowImg8, highImg: highImg8, text: 'musicaalta' },
 ];
 
 export { recImg };
