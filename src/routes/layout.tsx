@@ -16,9 +16,14 @@ const Layout = (): JSX.Element => {
   const navigate = useNavigate();
   const userMenu = (
     <Dropdown.Menu>
-      <Dropdown.Item>👤 个人中心</Dropdown.Item>
+      <Dropdown.Item onClick={() => navigate('/profile')}>
+        👤 个人中心
+      </Dropdown.Item>
       <Dropdown.Item>⚙️ 系统设置</Dropdown.Item>
       <Dropdown.Divider />
+      <Dropdown.Item onClick={() => navigate('/login')}>
+        🔑 重新登录
+      </Dropdown.Item>
       <Dropdown.Item>🚪 退出登录</Dropdown.Item>
     </Dropdown.Menu>
   );
@@ -31,6 +36,14 @@ const Layout = (): JSX.Element => {
     {
       itemKey: '/recognize',
       text: '📄 文本识别',
+    },
+    {
+      itemKey: '/profile',
+      text: '👤 个人中心',
+    },
+    {
+      itemKey: '/login',
+      text: '🔑 登录',
     },
   ];
 

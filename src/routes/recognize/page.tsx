@@ -9,6 +9,7 @@ import {
   Card,
   Table,
   Image,
+  Input,
 } from '@douyinfe/semi-ui';
 import { recImg } from './const';
 
@@ -84,6 +85,17 @@ const RecognizePage = (): JSX.Element => {
   const [uploadVisible, setUploadVisible] = useState(false);
   const [files, setFiles] = useState<any[]>([]);
 
+  // 初始化识别文本状态
+  const [recognizedTexts, setRecognizedTexts] = useState<
+    Record<string, string>
+  >(() => {
+    const initialTexts: Record<string, string> = {};
+    recImg.forEach(item => {
+      initialTexts[item.label] = item.text || '';
+    });
+    return initialTexts;
+  });
+
   const handleUpload = () => {
     setUploadVisible(true);
   };
@@ -118,6 +130,14 @@ const RecognizePage = (): JSX.Element => {
 
   const handleFileChange = (object: any) => {
     setFiles(object.fileList || []);
+  };
+
+  // 处理识别文本变化
+  const handleTextChange = (label: string, value: string) => {
+    setRecognizedTexts(prev => ({
+      ...prev,
+      [label]: value,
+    }));
   };
 
   return (
@@ -188,11 +208,17 @@ const RecognizePage = (): JSX.Element => {
             title="识别文本"
             dataIndex="text"
             key="text"
-            width={150}
+            width={180}
             align="center"
             render={(text, record) => (
-              <div className="px-3 py-2 bg-blue-50 rounded-lg text-sm font-mono text-blue-700 border border-blue-200 max-w-32 mx-auto">
-                {text || '无识别结果'}
+              <div className="px-2">
+                <Input
+                  value={recognizedTexts[record.label] || ''}
+                  onChange={value => handleTextChange(record.label, value)}
+                  placeholder="请输入识别结果"
+                  size="small"
+                  className="text-sm"
+                />
               </div>
             )}
           />
@@ -217,7 +243,7 @@ const RecognizePage = (): JSX.Element => {
                             识别结果
                           </div>
                           <div className="text-lg font-mono font-medium text-blue-700">
-                            {record.text || '无识别结果'}
+                            {recognizedTexts[record.label] || '无识别结果'}
                           </div>
                         </div>
 
